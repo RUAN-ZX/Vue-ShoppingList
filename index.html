@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ryan-Shopping</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id = "app" v-cloak>
+		<template v-if="Shoppinglist[this.curCol].length">
+			<table>
+				<thead>
+					<tr>
+						<td></td>
+						<td><button @click="changeCol(index)" v-for="(col,index) in items" class="tth">
+							{{col.column}}	
+						</button>
+						<td></td>
+					</tr>
+					<tr>
+					<!--
+					<input type="checkbox" v-model="validedAll" :true-value="" :false-value="">
+					当选中 validAll = true-value 反之 false-value 一般没有：绑定 就是true false 
+					-->
+					<th>
+					<input type="checkbox" v-model="validedAll">
+					</td>
+					</th>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Number</th>
+					<th>Operation</th>
+					<th>Hash</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(item,index) in Shoppinglist[this.curCol]">
+						<td><input type="checkbox" v-model="item.valided"></td>
+						<td>{{item.name}}</td>
+						<td>{{item.price}}</td>
+						
+						<td>
+							<button
+								@click="handleReduce(index)"
+								:disabled="item.count === 1">-</button>
+							{{item.count}}
+							<button @click="handleAdd(index)">+</button>
+						
+						</td>
+						<td>
+						<button @click="handleRemove(index)">Remove</button>
+						
+						</td>
+						<td>{{item.id}}</td>
+					</tr>
+				</tbody>		
+			</table>
+			<div>总价：{{totalPrice}}</div>
+		</template>
+		<div v-else>BLANK</div>
+	</div>	
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="my.js"></script>
+		
+</body>
+</html>
+  
+	
